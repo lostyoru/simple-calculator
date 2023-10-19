@@ -17,6 +17,7 @@ const calculate = (a,b,op) => {
     if(b==0 && op=='/'){
         previousInput.value = '';
         currentInput.value = 'Error';
+        throw new Error('Division by zero');
     }
     else{
         result = eval(a+op+b);
@@ -78,7 +79,12 @@ delBtn.addEventListener('click', () => {
 equalBtn.addEventListener('click', () => {
     previousInput.value += currentInput.value;
     numbers[numbersIndex] = currentInput.value;
-
+    if(previousInput.value[previousInput.value.length-1] == '+' || previousInput.value[previousInput.value.length-1] == '-' || previousInput.value[previousInput.value.length-1] == '*' || previousInput.value[previousInput.value.length-1] == '/'){
+        operators = operators.slice(0, -1);
+        numbers = numbers.slice(0, -1);
+        console.log(operators);
+        console.log(numbers);
+    }
     while(operators.includes('*') || operators.includes('/')){
         for(let i=0; i<operators.length; i++){
             if(operators[i] == '*' || operators[i] == '/'){
@@ -91,7 +97,13 @@ equalBtn.addEventListener('click', () => {
     }
 
     for(let i=0; i<numbers.length-1; i++){
-        numbers[i+1] = calculate(numbers[i], numbers[i+1], operators[i]);
+        try{
+            numbers[i+1] = calculate(numbers[i], numbers[i+1], operators[i]);
+        }
+        catch(err){
+            console.log(err);
+            return;
+        }
     }
 
     result = numbers[numbers.length-1];
