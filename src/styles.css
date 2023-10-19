@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-    @apply bg-gray-200;
+    background-image: linear-gradient(to right , #007991 , #78FFD6);
 }
 
 .screen {
