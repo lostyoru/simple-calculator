@@ -66,6 +66,9 @@ acBtn.addEventListener('click', () => {
 });
 
 delBtn.addEventListener('click', () => {
+    if(currentInput.value == 'Error'){
+        currentInput.value = '';
+    }
     if(currentInput.value.length > 0){
         currentInput.value = currentInput.value.slice(0, -1);
     }
@@ -102,6 +105,7 @@ equalBtn.addEventListener('click', () => {
         }
         catch(err){
             console.log(err);
+            currentInput.value = 'Error';
             return;
         }
     }
