@@ -34,8 +34,6 @@ numberButtons.forEach(button => {
         if(!numbers[numbersIndex]){
             numbers[numbersIndex] = '';
         }
-        console.log(numbers);
-        console.log(currentInput.value);
     });
 });
 
@@ -60,7 +58,6 @@ operatorButtons.forEach(button => {
 acBtn.addEventListener('click', () => {
     previousInput.value = '';
     currentInput.value = '';
-    evaluatedString = '';
     numbers = [];
     operators = [];
     numbersIndex = 0;
@@ -96,7 +93,7 @@ equalBtn.addEventListener('click', () => {
     for(let i=0; i<numbers.length-1; i++){
         numbers[i+1] = calculate(numbers[i], numbers[i+1], operators[i]);
     }
-    
+
     result = numbers[numbers.length-1];
     numbers = [];
     operators = [];
