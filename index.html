@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="dist/styles.css">
+    <link rel="shortcut icon" href="src/assets/icons8-calculator-50.png" type="image/x-icon">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="screen center w-64 bg-slate-950 mx-auto mt-20 relative rounded-lg overflow-hidden ">
+        <div class="result absolute top-0 w-full h-1/4 bg-slate-900 py-1">
+            <input type="text" class="previous-input w-full h-1/2 focus:outline-none text-right text-white text-base font-medium px-2 bg-transparent" disabled/>
+            <input type="text" class="current-input w-full h-1/2 focus:outline-none text-right text-white text-2xl font-medium px-2.5 bg-transparent" disabled/>
+        </div>
+        <div class="w-full h-3/4 absolute top-1/4 text-white grid gap-1 grid-rows-5 grid-cols-4 px-2.5 py-2 mx-auto">
+            <div class="ac-btn text-center text-3xl cursor-pointer col-span-2">AC</div>
+            <div class="del-btn text-center text-3xl cursor-pointer">DEL</div>
+            <div class="op-btn text-center text-3xl cursor-pointer">/</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">1</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">2</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">3</div>
+            <div class="op-btn text-center text-3xl cursor-pointer">*</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">4</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">5</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">6</div>
+            <div class="op-btn text-center text-3xl cursor-pointer">+</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">7</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">8</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">9</div>
+            <div class="op-btn text-center text-3xl cursor-pointer">-</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">.</div>
+            <div class="number-btn text-center text-3xl cursor-pointer">0</div>
+            <div class="equal-btn text-center text-3xl cursor-pointer col-span-2">=</div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
