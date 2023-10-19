@@ -9,3 +9,12 @@ body{
 .screen {
     height:450px;
 }
+
+@media screen and (max-width: 360px) {
+    .screen {
+        margin: 30px;
+        height: calc(100vh - 60px);
+        width : calc(100vw - 60px);
+    }
+    
+}

@@ -685,6 +685,14 @@ body{
   height:450px;
 }
 
+@media screen and (max-width: 360px) {
+  .screen {
+    margin: 30px;
+    height: calc(100vh - 60px);
+    width : calc(100vw - 60px);
+  }
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
