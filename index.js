@@ -41,10 +41,11 @@ numberButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
-        previousInput.value = previousInput.value + currentInput.value + button.textContent;
-        evaluatedString = previousInput.value;
+        if(!(currentInput.value == '' && previousInput.value == '')){
+            previousInput.value += currentInput.value + button.textContent;
+        };
         if(previousInput.value && ( previousInput.value[previousInput.value.length-2] == '+' || previousInput.value[previousInput.value.length-2] == '-' || previousInput.value[previousInput.value.length-2] == '*' || previousInput.value[previousInput.value.length-2] == '/')){
-            operators[operatorsIndex-1] = button.textContent;
+                operators[operatorsIndex-1] = button.textContent;
         }
         else{
             numbers[numbersIndex] = currentInput.value;
@@ -95,6 +96,7 @@ equalBtn.addEventListener('click', () => {
     for(let i=0; i<numbers.length-1; i++){
         numbers[i+1] = calculate(numbers[i], numbers[i+1], operators[i]);
     }
+    
     result = numbers[numbers.length-1];
     numbers = [];
     operators = [];
