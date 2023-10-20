@@ -32,7 +32,7 @@ currentInput.value = '';
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if(!(button.textContent == '.' && currentInput.value.includes('.'))){
-            currentInput.value += button.textContent;
+            currentInput.value += (currentInput.value == '' && button.textContent == '.' ) ? `0${button.textContent}` : button.textContent;
             if(!numbers[numbersIndex]){
                 numbers[numbersIndex] = '';
             }
