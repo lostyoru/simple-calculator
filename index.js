@@ -22,7 +22,7 @@ const calculate = (a,b,op) => {
     else{
         // to avoid floating point errors
         if(op == '+' || op == '-'){
-            result = eval(a*10+op+b*10)/10;
+            result = eval(a*1000000+op+b*1000000)/1000000;
         } 
         else{
             result = op == '*' ? eval(a*10+op+b*10)/100 : eval(a*10+op+b*10);
