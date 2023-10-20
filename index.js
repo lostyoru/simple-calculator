@@ -20,7 +20,13 @@ const calculate = (a,b,op) => {
         throw new Error('Division by zero');
     }
     else{
-        result = eval(a*10+op+b*10)/10; // to avoid floating point errors
+        // to avoid floating point errors
+        if(op == '+' || op == '-'){
+            result = eval(a*10+op+b*10)/10;
+        } 
+        else{
+            result = op == '*' ? eval(a*10+op+b*10)/100 : eval(a*10+op+b*10);
+        }
     }
     return result;
 }
