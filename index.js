@@ -48,20 +48,28 @@ numberButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if(!(currentInput.value == '' && previousInput.value == '')){
-            previousInput.value += currentInput.value + button.textContent; 
-        };
-        if(previousInput.value && ( previousInput.value[previousInput.value.length-2] == '+' || previousInput.value[previousInput.value.length-2] == '-' || previousInput.value[previousInput.value.length-2] == '*' || previousInput.value[previousInput.value.length-2] == '/')){
-                previousInput.value = previousInput.value.replace(previousInput.value[previousInput.value.length-2], '');
-                operators[operatorsIndex-1] = button.textContent;
+        if(!currentInput.value == ''){
+            console.log(currentInput.value);
+            if(!(currentInput.value == '' && previousInput.value == '')){
+                previousInput.value += currentInput.value + button.textContent;
+            };
+            if(previousInput.value && ( previousInput.value[previousInput.value.length-2] == '+' || previousInput.value[previousInput.value.length-2] == '-' || previousInput.value[previousInput.value.length-2] == '*' || previousInput.value[previousInput.value.length-2] == '/')){
+                    operators[operatorsIndex-1] = button.textContent;
+            }
+            else{
+                numbers[numbersIndex] = currentInput.value;
+                numbersIndex++;
+                operators[operatorsIndex] = button.textContent;
+                operatorsIndex++;
+            }
+            currentInput.value = '';
         }
         else{
-            numbers[numbersIndex] = currentInput.value;
-            numbersIndex++;
-            operators[operatorsIndex] = button.textContent;
-            operatorsIndex++;
+            if(previousInput.value.length > 0){
+                previousInput.value = previousInput.value.slice(0, -1) + button.textContent;
+                operators[operatorsIndex-1] = button.textContent;
+            }
         }
-        currentInput.value = '';
     });
 })
 
@@ -81,14 +89,24 @@ delBtn.addEventListener('click', () => {
     if(currentInput.value.length > 0){
         currentInput.value = currentInput.value.slice(0, -1);
     }
-    else{
-        currentInput.value = previousInput.value.slice(0, -1);
-        previousInput.value = '';
-    }
+    // else{
+    //     currentInput.value = previousInput.value.slice(0, -1);
+    //     previousInput.value = '';
+    //     if(currentInput.value[currentInput.value.length-1] == '+' || currentInput.value[currentInput.value.length-1] == '-' || currentInput.value[currentInput.value.length-1] == '*' || currentInput.value[currentInput.value.length-1] == '/'){
+    //         operators = operators.slice(0, -1);
+    //         // numbers = numbers.slice(0, -1);
+    //         console.log(operators);
+    //         console.log(numbers);
+    //     }
+    // }
 
 });
 
 equalBtn.addEventListener('click', () => {
+    console.log(numbers);
+    console.log(operators);
+    console.log(previousInput.value);
+    console.log(currentInput.value);
     previousInput.value += currentInput.value;
     numbers[numbersIndex] = currentInput.value;
     if(previousInput.value[previousInput.value.length-1] == '+' || previousInput.value[previousInput.value.length-1] == '-' || previousInput.value[previousInput.value.length-1] == '*' || previousInput.value[previousInput.value.length-1] == '/'){
