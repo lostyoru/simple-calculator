@@ -49,9 +49,10 @@ numberButtons.forEach(button => {
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
         if(!(currentInput.value == '' && previousInput.value == '')){
-            previousInput.value += currentInput.value + button.textContent;
+            previousInput.value += currentInput.value + button.textContent; 
         };
         if(previousInput.value && ( previousInput.value[previousInput.value.length-2] == '+' || previousInput.value[previousInput.value.length-2] == '-' || previousInput.value[previousInput.value.length-2] == '*' || previousInput.value[previousInput.value.length-2] == '/')){
+                previousInput.value = previousInput.value.replace(previousInput.value[previousInput.value.length-2], '');
                 operators[operatorsIndex-1] = button.textContent;
         }
         else{
