@@ -6,9 +6,7 @@ const delBtn = document.querySelector('.del-btn');
 const equalBtn = document.querySelector('.equal-btn');
 const operatorButtons = document.querySelectorAll('.op-btn');
 let numbers = [];
-let numbersIndex = 0;
 let operators = [];
-let operatorsIndex = 0;
 let result = 0;
 
 // Functions
@@ -39,35 +37,26 @@ numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if(!(button.textContent == '.' && currentInput.value.includes('.'))){
             currentInput.value += (currentInput.value == '' && button.textContent == '.' ) ? `0${button.textContent}` : button.textContent;
-            if(!numbers[numbersIndex]){
-                numbers[numbersIndex] = '';
-            }
         }
     });
 });
 
 operatorButtons.forEach(button => {
+    console.log(numbers);
     button.addEventListener('click', () => {
-        if(!currentInput.value == ''){
+        if(currentInput.value[currentInput.value.length -1 ] == '+' || currentInput.value[currentInput.value.length -1 ] == '-' ||currentInput.value[currentInput.value.length -1 ] == '*'|| currentInput.value[currentInput.value.length -1 ] == '/'){
+            currentInput.value = currentInput.value.slice(0,-1) + button.textContent
+        }
+        else if(!currentInput.value == ''){
             console.log(currentInput.value);
             if(!(currentInput.value == '' && previousInput.value == '')){
                 previousInput.value += currentInput.value + button.textContent;
             };
-            if(previousInput.value && ( previousInput.value[previousInput.value.length-2] == '+' || previousInput.value[previousInput.value.length-2] == '-' || previousInput.value[previousInput.value.length-2] == '*' || previousInput.value[previousInput.value.length-2] == '/')){
-                    operators[operatorsIndex-1] = button.textContent;
-            }
-            else{
-                numbers[numbersIndex] = currentInput.value;
-                numbersIndex++;
-                operators[operatorsIndex] = button.textContent;
-                operatorsIndex++;
-            }
             currentInput.value = '';
         }
         else{
             if(previousInput.value.length > 0){
                 previousInput.value = previousInput.value.slice(0, -1) + button.textContent;
-                operators[operatorsIndex-1] = button.textContent;
             }
         }
     });
@@ -86,35 +75,26 @@ delBtn.addEventListener('click', () => {
     if(currentInput.value == 'Error'){
         currentInput.value = '';
     }
-    if(currentInput.value.length > 0){
-        currentInput.value = currentInput.value.slice(0, -1);
-    }
-    // else{
-    //     currentInput.value = previousInput.value.slice(0, -1);
-    //     previousInput.value = '';
-    //     if(currentInput.value[currentInput.value.length-1] == '+' || currentInput.value[currentInput.value.length-1] == '-' || currentInput.value[currentInput.value.length-1] == '*' || currentInput.value[currentInput.value.length-1] == '/'){
-    //         operators = operators.slice(0, -1);
-    //         // numbers = numbers.slice(0, -1);
-    //         console.log(operators);
-    //         console.log(numbers);
-    //     }
-    // }
+    else {
+        if(currentInput.value.length > 0){
+            currentInput.value = currentInput.value.slice(0, -1);
+        }
+        else{
+            currentInput.value = previousInput.value.slice(0, -1);
+            previousInput.value = '';
+        }
+}
 
 });
 
 equalBtn.addEventListener('click', () => {
-    console.log(numbers);
-    console.log(operators);
-    console.log(previousInput.value);
-    console.log(currentInput.value);
-    previousInput.value += currentInput.value;
-    numbers[numbersIndex] = currentInput.value;
-    if(previousInput.value[previousInput.value.length-1] == '+' || previousInput.value[previousInput.value.length-1] == '-' || previousInput.value[previousInput.value.length-1] == '*' || previousInput.value[previousInput.value.length-1] == '/'){
-        operators = operators.slice(0, -1);
-        numbers = numbers.slice(0, -1);
-        console.log(operators);
-        console.log(numbers);
-    }
+    if(!(currentInput.value.includes('+') && currentInput.value.includes('-') && currentInput.value.includes('*') && currentInput.value.includes('/'))){
+        previousInput.value += currentInput.value;
+    } 
+    numbers = previousInput.value.split(/[+*\/-]/);
+    numbers = numbers.filter(num => !isNaN(num));
+    operators = previousInput.value.split(/[0-9.]/);
+    operators = operators.filter(op => op);
     while(operators.includes('*') || operators.includes('/')){
         for(let i=0; i<operators.length; i++){
             if(operators[i] == '*' || operators[i] == '/'){
@@ -140,8 +120,6 @@ equalBtn.addEventListener('click', () => {
     result = numbers[numbers.length-1];
     numbers = [];
     operators = [];
-    numbersIndex = 0;
-    operatorsIndex = 0;
     previousInput.value = '';
     currentInput.value = result;
 });
